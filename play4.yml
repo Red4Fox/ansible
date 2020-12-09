@@ -1,28 +1,29 @@
 ---
 
 - name: lession 11
-  hosts: prod
+  hosts: prodaction
   become: yes
 
   vars:
-   message1: Privet
+   message1: Hello
    message2: world
-   secret: jdsfjshdkfjhskdjf
+   message3: jdsfjshdkfjhskdjf
 
   tasks:
-  - name: Print secret vars
+  - name: Print var1
     debug:
      var: message1
 
   - debug:
-       msg: "secretnoe slovo: {{ secret }}"
+       msg: "Password: {{ message3 }}"
 
   - debug:
-       msg: "owner ----> {{ owner }} <----"
+       msg: "Prodaction server owners ----> {{ owner }} <----"
 
-  - set_fact: full_mess="{{ owner }} {{ message1 }} {{ message2 }} eto my password {{ secret }}"
+  - set_fact: full_messages="{{ owner }} {{ message1 }} {{ message2 }} it is a password :) {{ message3 }}"
+
   - debug:
-      var: full_mess
+      var: full_messages
 
   - debug:
       var: ansible_domain
@@ -34,3 +35,7 @@
       var: "result.stdout" 
   - debug:
       var: ansible_nodename
+
+  - name: check OS
+    debug: 
+     var: "ansible_os_family"

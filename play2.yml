@@ -1,6 +1,6 @@
 ---
 - name: install apache
-  hosts: prod
+  hosts: prodaction
   become: yes
 
   tasks: 
