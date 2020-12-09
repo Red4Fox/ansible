@@ -1,0 +1,10 @@
+[stg]
+stg-1 ansible_host=18.223.28.236
+
+[prod]
+prod-1 ansible_host=18.222.145.112 owner=vasya
+prod-2 ansible_host=3.139.90.224   owner=petya
+
+[g1:children]
+stg
+prod

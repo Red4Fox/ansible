@@ -1,0 +1,23 @@
+---
+- name: install apache and upload my web page
+  hosts: prod
+  become: yes
+
+  vars:
+   sf: index.html
+   df: /var/www/html
+
+  tasks:
+  - name: install apache
+    yum: name=httpd state=latest
+
+  - name: copy index file to destination
+    copy: src={{ sf }} dest={{ df }} mode=0555
+    notify: restart services
+
+  - name: start web servers and make enables status
+    service: name=httpd state=started enabled=yes
+
+  handlers:
+  - name: restart services
+    service: name=httpd state=restarted

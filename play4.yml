@@ -1,0 +1,28 @@
+---
+
+- name: lession 11
+  hosts: prod
+  become: yes
+
+  vars:
+   message1: Privet
+   message2: world
+   secret: jdsfjshdkfjhskdjf
+
+  tasks:
+  - name: Print secret vars
+    debug:
+     var: message1
+
+  - debug:
+       msg: "secretnoe slovo: {{ secret }}"
+
+  - debug:
+       msg: "owner ----> {{ owner }} <----"
+
+  - set_fact: full_mess="{{ owner }} {{ message1 }} {{ message2 }} eto my password {{ secret }}"
+  - debug:
+      var: full_mess
+
+  - debug:
+      var: ansible_domain
