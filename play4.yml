@@ -26,3 +26,11 @@
 
   - debug:
       var: ansible_domain
+
+  - shell: uptime
+    register: result
+
+  - debug:
+      var: "result.stdout" 
+  - debug:
+      var: ansible_nodename
