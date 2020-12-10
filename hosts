@@ -2,7 +2,7 @@
 staging-1 ansible_host=18.223.28.236
 
 [prodaction]
-prod-1 ansible_host=18.222.145.112 owner=Redhat1
+prod-1 ansible_host=18.222.145.112 owner=Redhat11
 prod-2 ansible_host=3.139.90.224   owner=Redhat2
 prod-3 ansible_host=3.135.9.87     owner=Redhat3
 prod-4 ansible_host=13.58.141.102  owner="Ubuntu Server" ansible_connection=ssh ansible_user=ubuntu
