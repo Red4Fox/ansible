@@ -1,0 +1,52 @@
+---
+- name: install apache and upload my web page
+  hosts: prodaction
+  become: yes
+
+  vars:
+   source: index.html
+   destination: /var/www/html
+
+  tasks:
+
+  - name: check OS
+    debug: var="ansible_os_family"
+
+  - block: # ------------for Redhat--------------
+    
+    - name: install apache for Redhat
+      yum: name=httpd state=latest
+   
+    - name: copy index file to destination
+      copy: src={{ source }} dest={{ destination }} mode=0555
+      #notify: restart services
+
+    - name: start web servers and make enables status
+      service: name=httpd state=started enabled=yes
+      
+    when: ansible_os_family == "RedHat"
+
+  - block: # ------------for Debian--------------
+
+    - name: install apache for Debian
+      apt: name=apache2 state=latest
+      
+    - name: copy index file to destination
+      copy: src={{ source }} dest={{ destination }} mode=0555
+      #notify: restart services
+
+    - name: start web servers and make enables status
+      service: name=apache2 state=started enabled=yes
+    
+    when: ansible_os_family == "Debian"
+ 
+
+  handlers:
+  - name: restart services on Debian
+    service: name=httpd state=restarted
+    when: ansible_os_family == "Debian"
+
+  - name: restart services on Debian
+    service: name=httpd state=restarted
+    when: ansible_os_family == "Redhat"
+

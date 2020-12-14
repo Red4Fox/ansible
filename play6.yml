@@ -1,0 +1,41 @@
+---
+
+- name: lession 11
+  hosts: prodaction
+  become: yes
+
+  vars:
+   message1: Hello
+   message2: world
+   message3: jdsfjshdkfjhskdjf
+
+  tasks:
+  - name: Print var1
+    debug:
+     var: message1
+
+  - debug:
+       msg: "Password: {{ message3 }}"
+
+  - debug:
+       msg: "Prodaction server owners ----> {{ owner }} <----"
+
+  - set_fact: full_messages="{{ owner }} {{ message1 }} {{ message2 }} it is a password :) {{ message3 }}"
+
+  - debug:
+      var: full_messages
+
+  - debug:
+      var: ansible_domain
+
+  - shell: uptime
+    register: result
+
+  - debug:
+      var: "result.stdout" 
+  - debug:
+      var: ansible_nodename
+
+  - name: check OS
+    debug: 
+     var: "ansible_os_family"
