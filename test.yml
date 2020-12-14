@@ -1,0 +1,41 @@
+---
+
+- name: name of playbook
+  hosts: prodaction
+  become: yes
+
+  vars:
+    mess1: text1
+    mess2: text2
+
+  tasks:
+  - name: first task
+    debug:
+      msg: "print {{ mess1 }}"
+
+  - debug:
+      var: mess2
+
+  - set_fact:
+      mess3: "{{ mess1 }} {{ mess2 }}"
+
+  - debug:
+      msg: "Pint {{ mess3 }}"
+
+  - debug:
+      msg: "{{ ansible_distribution }}"
+
+  - debug: 
+      var: "ansible_distribution"
+
+  - shell: free
+    register: total_memory
+
+  - debug:
+      var: "total_memory.stdout"
+
+  - debug:
+      var: "ansible_nodename"
+
+
+...

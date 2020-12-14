@@ -1,0 +1,11 @@
+---
+- name: run loop
+  hosts: prodaction
+  become: yes
+  
+  tasks:
+  - name: test1
+    debug: msg="hello {{ item }}"
+    loop:
+    - "user1"
+    - "user2" 
