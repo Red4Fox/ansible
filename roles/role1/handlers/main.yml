@@ -1,0 +1,10 @@
+---
+# handlers file for role1
+- name: restart services on redhat
+  service: name=httpd state=restarted
+  when: ansible_os_family == "RedHat"
+
+- name: restart services on Debian
+  service: name=apache2 state=restarted
+  when: ansible_os_family == "Debian"
+

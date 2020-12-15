@@ -1,0 +1,8 @@
+---
+- name: install apache and upload my web page
+  hosts: "{{ type }}"
+  become: yes
+ 
+  roles:
+  - { role: role1, when: ansible_system == "Linux" }
+
